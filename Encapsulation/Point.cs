@@ -55,12 +55,27 @@ namespace Encapsulation
 		//} 
 		#endregion
 
-		public double X {  get; set; } // Автосвойства
-		public double Y { get; set; }	
+
+		public double X { get; set; }
+		public double Y { get; set; }
+
+		// Метод для вывода значений X и Y
 		public void Print()
 		{
 			Console.WriteLine($"X={X}\tY={Y}");
-			//Console.WriteLine($"X={GetX()}\tY={GetY()}");
+		} 
+
+		// Метод для вычисления расстояния до другой точки
+		public double Distance(Point other)
+		{
+			return Math.Sqrt(Math.Pow(this.X - other.X, 2) + Math.Pow(this.Y - other.Y, 2));
 		}
+
+		// Статический метод для вычисления расстояния между двумя точками
+		public static double Distance(Point p1, Point p2)
+		{
+			return Math.Sqrt(Math.Pow(p1.X - p2.X, 2) + Math.Pow(p1.Y - p2.Y, 2));
+		}
+
 	}
 }
