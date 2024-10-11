@@ -55,27 +55,58 @@ namespace Encapsulation
 		//} 
 		#endregion
 
-
-		public double X { get; set; }
+		public double X { get; set; }   //Автосвойства
 		public double Y { get; set; }
+		public Point(double x = 0, double y = 0)
+		{
+			this.X = x;
+			this.Y = y;
+			Console.WriteLine($"Constructor:{this.GetHashCode()}");
+		}
+		public Point(Point other)
+		{
+			this.X = other.X;
+			this.Y = other.Y;
+			Console.WriteLine($"CopyConstructor:{GetHashCode()}");
+		}
+		~Point()
+		{
+			Console.WriteLine($"Destructor:\t{this.GetHashCode()}");
+		}
+		public static Point operator +(Point left, Point right)
+		{
+			Point res = new Point();
+			res.X = left.X + right.X;
+			res.Y = left.Y + right.Y;
+			return res;
+		}
+		public static Point operator -(Point left, Point right)
+		{
+			return new Point
+				(
+					left.X - right.X,
+					left.Y - right.Y
+				);
+		}
+		public static Point operator ++(Point obj)
+		{
+			obj.X++;
+			obj.Y++;
+			return obj;
+		}
+		public static bool operator ==(Point left, Point right)
+		{
+			return left.X == right.X && left.Y == right.Y;
+		}
+		public static bool operator !=(Point left, Point right)
+		{
+			return !(left == right);
+		}
 
-		// Метод для вывода значений X и Y
 		public void Print()
 		{
-			Console.WriteLine($"X={X}\tY={Y}");
-		} 
-
-		// Метод для вычисления расстояния до другой точки
-		public double Distance(Point other)
-		{
-			return Math.Sqrt(Math.Pow(this.X - other.X, 2) + Math.Pow(this.Y - other.Y, 2));
+			Console.WriteLine($"{GetHashCode()}:\tX = {X}\tY = {Y}");
+			//Console.WriteLine($"X = {GetX()}\tY = {GetY()}");
 		}
-
-		// Статический метод для вычисления расстояния между двумя точками
-		public static double Distance(Point p1, Point p2)
-		{
-			return Math.Sqrt(Math.Pow(p1.X - p2.X, 2) + Math.Pow(p1.Y - p2.Y, 2));
-		}
-
 	}
 }
